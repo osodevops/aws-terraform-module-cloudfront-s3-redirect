@@ -3,6 +3,11 @@ variable "fqdn" {
   description = "The FQDN of the website and also name of the S3 bucket"
 }
 
+variable "bucket_name" {
+  type        = string
+  description = "The name of the S3 bucket"
+}
+
 variable "redirect_target" {
   type        = string
   description = "The FQDN to redirect to"

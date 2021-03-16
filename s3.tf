@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "main" {
   provider = aws.main
-  bucket   = var.fqdn
+  bucket   = var.bucket_name
   acl      = "private"
   policy   = data.aws_iam_policy_document.bucket_policy.json
 
