@@ -7,7 +7,7 @@ output "s3_website_endpoint" {
   # https://github.com/terraform-providers/terraform-provider-aws/issues/1117
   # value = aws_s3_bucket.main.website_endpoint
 
-  value = "${var.fqdn}.s3-website-${data.aws_region.main.name}.amazonaws.com"
+  value = "${var.fqdn}.s3-website-${data.aws_region.current.name}.amazonaws.com"
 }
 
 output "s3_hosted_zone_id" {
