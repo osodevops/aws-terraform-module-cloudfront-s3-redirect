@@ -4,7 +4,7 @@ resource "aws_cloudfront_distribution" "main" {
   origin {
     origin_id   = "origin-${var.fqdn}"
     # domain_name = aws_s3_bucket.main.website_endpoint
-    domain_name = "http://bucket_name.s3-website.${data.aws_region.main}.amazonaws.com"
+    domain_name = "http://bucket_name.s3-website.${data.aws_region.main.name}.amazonaws.com"
     s3_origin_config {
           origin_access_identity = aws_cloudfront_origin_access_identity.current.cloudfront_access_identity_path
     }    
