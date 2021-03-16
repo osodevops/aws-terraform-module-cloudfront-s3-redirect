@@ -1,4 +1,7 @@
 resource "aws_cloudfront_distribution" "main" {
+  depends_on = [
+    aws_s3_bucket.main
+  ]
   provider     = aws.cloudfront
   http_version = "http2"
 
