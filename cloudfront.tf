@@ -4,26 +4,23 @@ resource "aws_cloudfront_distribution" "main" {
   origin {
     origin_id   = "origin-${var.fqdn}"
     domain_name = aws_s3_bucket.main.website_endpoint
-
-    comment = "Distribution used for ${var.fqdn} redirect"
     s3_origin_config {
-      origin_access_identity = aws_cloudfront_origin_access_identity.current.cloudfront_access_identity_path
-    }
-
+          origin_access_identity = aws_cloudfront_origin_access_identity.current.cloudfront_access_identity_path
+    }    
     # https://docs.aws.amazon.com/AmazonCloudFront/latest/
     # DeveloperGuide/distribution-web-values-specify.html
-    custom_origin_config {
-      # "HTTP Only: CloudFront uses only HTTP to access the origin."
-      # "Important: If your origin is an Amazon S3 bucket configured
-      # as a website endpoint, you must choose this option. Amazon S3
-      # doesn't support HTTPS connections for website endpoints."
-      origin_protocol_policy = "http-only"
+    # custom_origin_config {
+    #   # "HTTP Only: CloudFront uses only HTTP to access the origin."
+    #   # "Important: If your origin is an Amazon S3 bucket configured
+    #   # as a website endpoint, you must choose this option. Amazon S3
+    #   # doesn't support HTTPS connections for website endpoints."
+    #   origin_protocol_policy = "http-only"
 
-      http_port  = "80"
-      https_port = "443"
+    #   http_port  = "80"
+    #   https_port = "443"
 
-      origin_ssl_protocols = ["TLSv1.2"]
-    }
+    #   origin_ssl_protocols = ["TLSv1.2"]
+    # }
 
     # s3_origin_config is not compatible with S3 website hosting, if this
     # is used, /news/index.html will not resolve as /news/.
@@ -37,6 +34,8 @@ resource "aws_cloudfront_distribution" "main" {
     #   value = var.refer_secret
     # }
   }
+
+  comment = "Distribution used for ${var.fqdn} redirect"
 
   enabled = true
 
