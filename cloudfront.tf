@@ -1,13 +1,14 @@
 resource "aws_cloudfront_distribution" "main" {
-  depends_on = [
-    aws_s3_bucket.main
-  ]
-  provider     = aws.cloudfront
-  http_version = "http2"
+  provider = aws.cloudfront
 
   origin {
     origin_id   = "origin-${var.fqdn}"
     domain_name = aws_s3_bucket.main.website_endpoint
+
+    comment = "Distribution used for ${var.fqdn} redirect"
+    s3_origin_config {
+      origin_access_identity = aws_cloudfront_origin_access_identity.current.cloudfront_access_identity_path
+    }
 
     # https://docs.aws.amazon.com/AmazonCloudFront/latest/
     # DeveloperGuide/distribution-web-values-specify.html
@@ -31,10 +32,10 @@ resource "aws_cloudfront_distribution" "main" {
     #   origin_access_identity = "${aws_cloudfront_origin_access_identity.main.cloudfront_access_identity_path}"
     # }
     # Instead, we use a secret to authenticate CF requests to S3 policy.
-    custom_header {
-      name  = "User-Agent"
-      value = var.refer_secret
-    }
+    # custom_header {
+    #   name  = "User-Agent"
+    #   value = var.refer_secret
+    # }
   }
 
   enabled = true
@@ -74,7 +75,14 @@ resource "aws_cloudfront_distribution" "main" {
     ssl_support_method       = "sni-only"
     minimum_protocol_version = "TLSv1"
   }
-
+  
   web_acl_id = var.web_acl_id
+
+  tags = var.common_tags
+
+  depends_on = [
+    aws_s3_bucket.main
+  ]
 }
 
+resource "aws_cloudfront_origin_access_identity" "current" {}

@@ -22,8 +22,11 @@ data "aws_iam_policy_document" "bucket_policy" {
     }
 
     principals {
-      type        = "*"
-      identifiers = ["*"]
+      type = "AWS"
+
+      identifiers = [
+        aws_cloudfront_origin_access_identity.current.iam_arn,
+      ]
     }
   }
 }
