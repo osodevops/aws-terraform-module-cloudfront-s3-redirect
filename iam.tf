@@ -12,7 +12,7 @@ data "aws_iam_policy_document" "bucket_policy" {
     ]
 
     resources = [
-      "arn:aws:s3:::${var.fqdn}/*",
+      "arn:aws:s3:::${var.bucket_name}/*",
     ]
 
     principals {
