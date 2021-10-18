@@ -54,7 +54,7 @@ usage: |-
 
 # Example usage
 examples: |-
-### Using this module
+  ### Using this module
   ```hcl
     module "main" {
       source = "github.com/osodevops/aws-terraform-module-cloudfront-s3-redirect"
