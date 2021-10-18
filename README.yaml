@@ -155,7 +155,8 @@ examples: |-
     }
   ```
 
-### Inputs
+  ### Inputs
+
   Example module inputs
   | Name | Description | Type | Default | Required |
   |------|-------------|:----:|:-----:|:-----:|
