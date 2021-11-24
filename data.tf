@@ -3,5 +3,5 @@
 # }
 
 data "aws_region" "current" {
-  provider = "main"
+  provider = aws.main
 }
