@@ -2,6 +2,14 @@ output "s3_bucket_id" {
   value = aws_s3_bucket.main.id
 }
 
+output "s3_website_endpoint" {
+  # This doesn't work in terraform due to dependency issues:
+  # https://github.com/terraform-providers/terraform-provider-aws/issues/1117
+  # value = aws_s3_bucket.main.website_endpoint
+
+  value = "${var.fqdn}.s3-website-${data.aws_region.current.name}.amazonaws.com"
+}
+
 output "s3_hosted_zone_id" {
   value = aws_s3_bucket.main.hosted_zone_id
 }
