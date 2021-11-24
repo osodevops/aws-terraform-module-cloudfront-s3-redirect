@@ -1,7 +1,7 @@
 resource "aws_s3_bucket" "main" {
   bucket   = var.bucket_name
   acl      = "private"
-  region   = data.aws_region.current.name
+  region   = var.region
   website {
     redirect_all_requests_to = var.redirect_target
   }

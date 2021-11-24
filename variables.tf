@@ -36,6 +36,12 @@ variable "refer_secret" {
   default     = "123-VERY-SECRET-456"
 }
 
+variable "region" {
+  type        = string
+  description = "S3 bucket region"
+  default     = "eu-west-2"
+}
+
 variable "priceclass" {
   type        = string
   description = "Pick the price class to use; PriceClass_100, PriceClass_200, PriceClass_All"
